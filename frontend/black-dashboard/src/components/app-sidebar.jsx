@@ -25,14 +25,16 @@ export function AppSidebar() {
   const { data: filters } = useQuery({
     queryKey: ["filters"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/filters`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/filters`
+      );
       return res.json();
     },
   });
 
   return (
     <Sidebar className="border-r border-sidebar-border bg-sidebar">
-      <SidebarHeader className="border-b border-sidebar-border bg-sidebar px-4 py-4">
+      <SidebarHeader className="border-b border-sidebar-border bg-sidebar px-4 py-4 overflow-x-hidden">
         <h2 className="text-base font-semibold text-sidebar-foreground tracking-tight">
           Filters
         </h2>

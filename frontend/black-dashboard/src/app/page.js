@@ -24,13 +24,16 @@ export default function DashboardPage() {
   const filtersStore = useFilterStore((state) => state.filtersStore);
   const mutation = useMutation({
     mutationFn: async (filters) => {
-      const res = await fetch(`http://localhost:5000/api/data`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(filters),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/data`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(filters),
+        }
+      );
       return res.json();
     },
   });
@@ -98,7 +101,7 @@ export default function DashboardPage() {
   const uniqueCountries = new Set(jsonData?.data?.map((item) => item.country));
 
   return (
-    <div className="p-6 lg:p-8 max-w-full space-y-6 bg-background min-h-screen text-foreground">
+    <div className="p-6 lg:p-8 max-w-full space-y-6 bg-background min-h-screen text-foreground ">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Analytics Dashboard
